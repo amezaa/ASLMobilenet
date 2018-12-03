@@ -71,6 +71,9 @@ if __name__ == "__main__":
   file_name = "tf_files/flower_photos/daisy/3475870145_685a19116d.jpg"
   model_file = "tf_files/retrained_graph.pb"
   label_file = "tf_files/retrained_labels.txt"
+  #Uncomment 'model_file' and 'label_file' below to switch to 64 word model:
+  #model_file = "tf_files/retrained_graph2.pb"
+  #label_file = "tf_files/retrained_labels2.txt"
   input_height = 224
   input_width = 224
   input_mean = 128

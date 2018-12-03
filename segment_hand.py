@@ -2,15 +2,13 @@ import numpy as np
 import cv2
 import os
 
+#boundaries here represent RGB values
+#edit them to match the color pixel values of 
+#the gloves you're using
 boundaries = [
     ([0, 120, 0], [140, 255, 100]),
     ([25, 0, 75], [180, 38, 255])
 ]
-
-#[
-#    ([110,0,20],[130,5,40]),
-#    ([60, 0, 10], [225, 100, 255])
-#]
 
 def hand_segment(frame):
 
@@ -30,14 +28,19 @@ def hand_segment(frame):
     gray = cv2.cvtColor(output, cv2.COLOR_RGB2GRAY)
     return gray
 
-image = cv2.imread("/Users/bowenite/Desktop/tensorflow-for-poets-2/frames/frame32.jpg")
-seg_frame = hand_segment(image)
-cv2.imwrite("/Users/bowenite/Desktop/tensorflow-for-poets-2/processed_frames/frame32.jpg", seg_frame)
+def save_seg_frames(direct, new_direct):
+    """
+    given a directory to some frames
+    will segment out the hands
+    in the color range represented by boundaries
+    and save them in new_direct
+    """
+    frames = os.listdir(direct)
+    for frame in frames:
 
-#if __name__ == '__main__':
-#    for frame in ["framesframe27.HEIC"]: #os.listdir("/Users/bowenite/Desktop/tensorflow-for-poets-2/frames"):
-#        image = cv2.imread("/Users/bowenite/Desktop/tensorflow-for-poets-2/frames/" + frame)
-#        print(image)
-#        seg_frame = hand_segment(image)
-#        cv2.imwrite("/Users/bowenite/Desktop/tensorflow-for-poets-2/processed_frames" + frame, seg_frame)
+       image = cv2.imread(direct + frame)
+       seg_frame = hand_segment(image)
+       cv2.imwrite(new_direct + frame, seg_frame)
+
+    print("Finished segmenting hands")
 
