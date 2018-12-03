@@ -17,13 +17,11 @@ def run(video_path, frame_dir):
 
 	predicted_word = predict_on_vid(frame_dir, model_file, label_file, input_height, input_width, input_mean, input_std, input_layer, output_layer, graph, input_name, output_name, input_operation, output_operation, sample_size)
 
-	print("The Predicted Word is: ", predicted_word)
-
-
+	return predicted_word
 
 if __name__ == "__main__":
 	file_name = ""
-	direct_name = ""
+	direct_name = "segmented_frames/"
 	model_file = "tf_files/retrained_graph.pb"
 	label_file = "tf_files/retrained_labels.txt"
 	#Uncomment 'model_file' and 'label_file' below to switch to 64 word model:
@@ -80,6 +78,11 @@ if __name__ == "__main__":
 		output_layer = args.output_layer
 
 	predicted_word = run(file_name, direct_name)
+
+	#remove segmented frames from directory in case you're 
+	#running multiple videos sequentially 
+	shutil.rmtree(direct_name)
+	os.mkdir(direct_name)
 
 
 
