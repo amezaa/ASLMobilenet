@@ -81,6 +81,7 @@ if __name__ == "__main__":
 
 	#remove segmented frames from directory in case you're 
 	#running multiple videos sequentially 
+
 	shutil.rmtree(direct_name)
 	os.mkdir(direct_name)
 

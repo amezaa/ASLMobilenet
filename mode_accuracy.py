@@ -17,12 +17,16 @@ def predict_on_vid(directory, model_file, label_file, input_height, input_width,
 	"""
 
 	images = random.sample(os.listdir(directory), sample_size)
+	#load all images instead:
+	#images = os.listdir(directory)
 
 	total_time = 0
 	temp_dic = word_count_dic.copy()
 
 	for image in images:
 		#path to image
+		if image == '.DS_Store':
+			continue 
 		path = os.path.join(directory, image)
 		#initialize tensor
 		t = read_tensor_from_image_file(path, input_height=input_height, input_width=input_width, input_mean=input_mean, input_std=input_std)
@@ -45,8 +49,7 @@ def predict_on_vid(directory, model_file, label_file, input_height, input_width,
 		temp_dic[labels[top_index]] += 1
 		#for i in top_k:
 		#print(template.format(labels[i], results[i]))
-	#print(temp_dic)
-	#print(word_count_dic)
+	print("Word Counts: ", temp_dic)
 	predicted_word = max(temp_dic.keys(), key=(lambda key: temp_dic[key]))
 	print("The Predicted Word Is:", name_dic[predicted_word])
 	print("The Evaluation Time Was:", total_time)
