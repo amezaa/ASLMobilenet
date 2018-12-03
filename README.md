@@ -1,5 +1,9 @@
 # Overview
 
+To process a video cd into the Repo and type into your command line:
+`python predict.py --video=<path_to_your_video>`
+
+
 This repo contains code for the "TensorFlow for poets 2" series of codelabs.
 
 There are multiple versions of this codelab depending on which version 
